@@ -1,50 +1,31 @@
 import * as React from "react";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
+import Cell from "./Cell";
 
-const Input = () => (
+const App = () => (
   <div
     style={{
-      display: "flex",
-      flexDirection: "column",
+      display: "grid",
+      gridTemplateColumns: "repeat(5, 85px)",
+      gridTemplateRows: "repeat(5, 85px)",
+      gap: "0",
+      rowGap: "0",
+      columnGap: "0",
+      width: "70%",
+      height: "70%",
       justifyContent: "center",
       alignItems: "center",
-      width: "85px",
-      height: "85px",
-      border: "solid 2px black"
-      // borderTop: "solid 2px black",
-      // borderBottom: "solid 2px black",
-      // borderRight: "solid 2px black",
-      // borderLeft: "solid 2px black"
     }}
   >
-    <span style={{ marginLeft: "5px", alignSelf: "start" }}>244</span>
-    <TextField
-      style={{ width: 50, marginBottom: "15px" }}
-      id="outlined-basic"
-      variant="outlined"
-    />
+    <Cell />
+    <Cell />
+    <Cell />
+    <Cell />
+    <Cell />
+    <Cell />
+    <Cell />
+    <Cell />
   </div>
 );
 
-export default function App() {
-  return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(5, 1fr)",
-        gridTemplateRows: "repeat(5, 1fr)",
-        gridGap: "0 rem"
-      }}
-    >
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-    </div>
-  );
-}
-
+export default App;
