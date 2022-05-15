@@ -53,6 +53,7 @@ const App = () => {
           // marginTop: 'auto',
           // marginRight: 'auto',
           // marginLeft: 'auto',
+          marginBottom: "200px",
         }}
       >
         {generateCells()}
