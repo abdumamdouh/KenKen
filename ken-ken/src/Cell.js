@@ -22,6 +22,8 @@ const Cell = () => (
       style={{ width: 50, marginBottom: "15px" }}
       id="outlined-basic"
       variant="outlined"
+      // value={5}
+      // disabled
     />
   </div>
 );
