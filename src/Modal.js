@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -21,10 +22,15 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModal({ hanldeGenerate }) {
+  const [info, setInfo] = useState({});
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleOnClick = () => {
+    hanldeGenerate(info);
+  };
 
   return (
     <div>
@@ -62,19 +68,22 @@ export default function BasicModal() {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="female"
                 name="radio-buttons-group"
+                onChange={(e) =>
+                  setInfo({ ...info, algorithm: e.target.value })
+                }
               >
                 <FormControlLabel
-                  value="Backtracking"
+                  value="0"
                   control={<Radio />}
                   label="Backtracking"
                 />
                 <FormControlLabel
-                  value="male"
+                  value="1"
                   control={<Radio />}
                   label="Backtracking with forward checking"
                 />
                 <FormControlLabel
-                  value="other"
+                  value="2"
                   control={<Radio />}
                   label="Backtracking with forward checking and arc consistency"
                 />
@@ -88,11 +97,17 @@ export default function BasicModal() {
             >
               Choose borard size:
             </Typography>
-            <TextField id="standard-basic" variant="standard" />
+            <TextField
+              id="standard-basic"
+              variant="standard"
+              type="number"
+              onChange={(e) => setInfo({ ...info, size: e.target.value })}
+            />
             <Button
               variant="contained"
               color="primary"
               style={{ margin: "30px 0" }}
+              onClick={handleOnClick}
             >
               Generate Puzzle
             </Button>

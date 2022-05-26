@@ -82,13 +82,15 @@ const request = {
 const App = () => {
   const [cells, setCells] = useState(request);
   const [result, setResult] = useState({});
+
   const handleOnChange = (value, index) => {
     // console.log("hi", value, index);
     setResult({ ...result, [index]: value });
   };
+
   const handleSubmit = () => {
     console.log("zepy");
-    if (Object.keys(result).length != cells.result.length)
+    if (Object.keys(result).length != cells?.result.length)
       toast.error("🦄 Please enter valus for all cells!", {
         position: "top-right",
         autoClose: 5000,
@@ -99,8 +101,8 @@ const App = () => {
         progress: undefined,
       });
     else {
-      for (let i = 0; i < cells.result.length; i++)
-        if (result[i] != cells.result[i]) {
+      for (let i = 0; i < cells?.result.length; i++)
+        if (result[i] != cells?.result[i]) {
           toast.error("Wrong Answer!", {
             position: "top-right",
             autoClose: 5000,
@@ -121,8 +123,16 @@ const App = () => {
         draggable: true,
         progress: undefined,
       });
+      //TODO : clear after submit
     }
   };
+
+  const hanldeGenerate = (info) => {
+    console.log("gene", info);
+    //TODO: API call to get request
+    //TODO: validate before API Call
+  };
+
   return (
     <div
       style={{
@@ -145,7 +155,7 @@ const App = () => {
         KenKen
       </Typography>
       <Stack spacing={5} direction="row" style={{ margin: "30px 0" }}>
-        <Modal />
+        <Modal hanldeGenerate={hanldeGenerate} />
         <Button variant="contained" color="success" onClick={handleSubmit}>
           Submit
         </Button>
@@ -154,9 +164,9 @@ const App = () => {
         style={{
           display: "grid",
           gridTemplateColumns: `repeat(${Math.sqrt(
-            cells.values.length
+            cells?.values.length
           )}, 85px)`,
-          gridTemplateRows: `repeat(${Math.sqrt(cells.values.length)}, 85px)`,
+          gridTemplateRows: `repeat(${Math.sqrt(cells?.values.length)}, 85px)`,
           gap: "0",
           rowGap: "0",
           columnGap: "0",
@@ -167,7 +177,7 @@ const App = () => {
           marginBottom: "200px",
         }}
       >
-        {cells.values.map((cell, i) => (
+        {cells?.values.map((cell, i) => (
           <Cell key={i} cell={cell} id={i} handleOnChange={handleOnChange} />
         ))}
       </div>
