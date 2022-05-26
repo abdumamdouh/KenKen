@@ -5,6 +5,8 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "./Modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const size = 5;
 
@@ -79,10 +81,47 @@ const request = {
 
 const App = () => {
   const [cells, setCells] = useState(request);
-  const generateCells = () => {
-    const cells = [];
-    for (let i = 0; i < size * size; i++) cells.push(<Cell key={i} />);
-    return cells;
+  const [result, setResult] = useState({});
+  const handleOnChange = (value, index) => {
+    // console.log("hi", value, index);
+    setResult({ ...result, [index]: value });
+  };
+  const handleSubmit = () => {
+    console.log("zepy");
+    if (Object.keys(result).length != cells.result.length)
+      toast.error("🦄 Please enter valus for all cells!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    else {
+      for (let i = 0; i < cells.result.length; i++)
+        if (result[i] != cells.result[i]) {
+          toast.error("Wrong Answer!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          return;
+        }
+      toast.success("Right Answer, Good Job!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
   return (
     <div
@@ -96,6 +135,7 @@ const App = () => {
         gap: "0px",
       }}
     >
+      <ToastContainer />
       <Typography
         variant="h2"
         gutterBottom
@@ -106,7 +146,7 @@ const App = () => {
       </Typography>
       <Stack spacing={5} direction="row" style={{ margin: "30px 0" }}>
         <Modal />
-        <Button variant="contained" color="success">
+        <Button variant="contained" color="success" onClick={handleSubmit}>
           Submit
         </Button>
       </Stack>
@@ -127,9 +167,8 @@ const App = () => {
           marginBottom: "200px",
         }}
       >
-        {/* {generateCells()} */}
         {cells.values.map((cell, i) => (
-          <Cell key={i} cell={cell} />
+          <Cell key={i} cell={cell} id={i} handleOnChange={handleOnChange} />
         ))}
       </div>
     </div>
