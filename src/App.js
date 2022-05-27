@@ -143,10 +143,37 @@ const App = () => {
     setSolve(true);
   };
 
-  const hanldeGenerate = (info) => {
+  const hanldeGenerate = async (info) => {
+    setSolve(false);
     console.log("gene", info);
-    //TODO: API call to get request
     //TODO: validate before API Call
+    if (!("size" in info && "algorithm" in info)) {
+      toast.error("🦄 Please enter both algorithm and size!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    //TODO: API call to get request
+
+    const rawResponse = await fetch(
+      `https://kenken-backend-server.herokuapp.com/kenken`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(info),
+      }
+    );
+    const data = await rawResponse.json();
+    console.log(data);
   };
 
   return (

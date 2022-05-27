@@ -29,7 +29,7 @@ const Cell = ({ cell, handleOnChange, id, solve, answer }) => {
         id="outlined-basic"
         variant="outlined"
         type="number"
-        value={solve ? answer : null}
+        value={solve ? answer : ""}
         disabled={solve}
         onChange={(e) => handleOnChange(e.target.value, id)}
       />
