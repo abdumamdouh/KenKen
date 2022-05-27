@@ -85,7 +85,7 @@ const App = () => {
   const [result, setResult] = useState({});
   const [solve, setSolve] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [modalOpen, setModalOpen] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleOnChange = (value, index) => {
     // console.log("hi", value, index);
@@ -94,6 +94,7 @@ const App = () => {
 
   const handleSubmit = () => {
     console.log("zepy");
+    setSolve(false);
     if (Object.keys(result).length != cells?.result.length)
       toast.error("🦄 Please enter valus for all cells!", {
         position: "top-right",
@@ -178,7 +179,7 @@ const App = () => {
     );
     const data = await rawResponse.json();
     console.log(data);
-    setModalOpen(false);
+    setModalOpen(!modalOpen);
     if (rawResponse.status == 200) {
       setCells(data);
       setLoading(false);

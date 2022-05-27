@@ -24,9 +24,9 @@ const style = {
 
 export default function BasicModal({ hanldeGenerate, modalOpen }) {
   const [info, setInfo] = useState({});
-  const [open, setOpen] = React.useState(modalOpen);
+  const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
-    setOpen(modalOpen);
+    setOpen(false);
   }, [modalOpen]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
