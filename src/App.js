@@ -130,6 +130,19 @@ const App = () => {
     }
   };
 
+  const handleSolve = () => {
+    toast.info("Solved!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    setSolve(true);
+  };
+
   const hanldeGenerate = (info) => {
     console.log("gene", info);
     //TODO: API call to get request
@@ -162,11 +175,7 @@ const App = () => {
         <Button variant="contained" color="success" onClick={handleSubmit}>
           Submit
         </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => setSolve(true)}
-        >
+        <Button variant="contained" color="secondary" onClick={handleSolve}>
           Solve
         </Button>
       </Stack>
