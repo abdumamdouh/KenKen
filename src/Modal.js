@@ -22,9 +22,12 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ hanldeGenerate }) {
+export default function BasicModal({ hanldeGenerate, modalOpen }) {
   const [info, setInfo] = useState({});
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(modalOpen);
+  React.useEffect(() => {
+    setOpen(modalOpen);
+  }, [modalOpen]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

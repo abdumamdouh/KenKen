@@ -81,10 +81,11 @@ const request = {
 };
 
 const App = () => {
-  const [cells, setCells] = useState(request);
+  const [cells, setCells] = useState();
   const [result, setResult] = useState({});
   const [solve, setSolve] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState();
 
   const handleOnChange = (value, index) => {
     // console.log("hi", value, index);
@@ -159,8 +160,11 @@ const App = () => {
       });
       return;
     }
-    //TODO: API call to get request
 
+    //TODO: API call to get request
+    setLoading(true);
+    const { SERVER_URL } = process.env;
+    console.log(SERVER_URL);
     const rawResponse = await fetch(
       `https://kenken-backend-server.herokuapp.com/kenken`,
       {
@@ -174,6 +178,20 @@ const App = () => {
     );
     const data = await rawResponse.json();
     console.log(data);
+    setModalOpen(false);
+    if (rawResponse.status == 200) {
+      setCells(data);
+      setLoading(false);
+      toast.info("Created!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (
@@ -198,7 +216,7 @@ const App = () => {
         KenKen
       </Typography>
       <Stack spacing={5} direction="row" style={{ margin: "30px 0" }}>
-        <Modal hanldeGenerate={hanldeGenerate} />
+        <Modal hanldeGenerate={hanldeGenerate} modalOpen={modalOpen} />
         <Button variant="contained" color="success" onClick={handleSubmit}>
           Submit
         </Button>
