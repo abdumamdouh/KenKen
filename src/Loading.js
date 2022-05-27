@@ -1,8 +1,15 @@
 import React from "react";
 import ReactLoading from "react-loading";
 
-const Lodaing = ({ type, color }) => (
-  <ReactLoading type={type} color={color} height={"20%"} width={"20%"} />
+const Lodaing = () => (
+  <div>
+    <ReactLoading
+      color={"#000"}
+      type={"spin"}
+      height={"120px"}
+      width={"120px"}
+    />
+  </div>
 );
 
 export default Lodaing;

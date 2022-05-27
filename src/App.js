@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import Cell from "./Cell";
+import Loading from "./Loading";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -83,6 +84,7 @@ const App = () => {
   const [cells, setCells] = useState(request);
   const [result, setResult] = useState({});
   const [solve, setSolve] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleOnChange = (value, index) => {
     // console.log("hi", value, index);
@@ -170,31 +172,45 @@ const App = () => {
       </Stack>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${Math.sqrt(
-            cells?.values.length
-          )}, 85px)`,
-          gridTemplateRows: `repeat(${Math.sqrt(cells?.values.length)}, 85px)`,
-          gap: "0",
-          rowGap: "0",
-          columnGap: "0",
-          width: "70%",
-          height: "70%",
+          display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: "200px",
         }}
       >
-        {cells?.values.map((cell, i) => (
-          <Cell
-            key={i}
-            cell={cell}
-            solve={solve}
-            answer={cells.result[i]}
-            id={i}
-            handleOnChange={handleOnChange}
-          />
-        ))}
+        {loading ? (
+          <Loading />
+        ) : (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: `repeat(${Math.sqrt(
+                cells?.values.length
+              )}, 85px)`,
+              gridTemplateRows: `repeat(${Math.sqrt(
+                cells?.values.length
+              )}, 85px)`,
+              gap: "0",
+              rowGap: "0",
+              columnGap: "0",
+              width: "70%",
+              height: "70%",
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: "200px",
+            }}
+          >
+            {cells?.values.map((cell, i) => (
+              <Cell
+                key={i}
+                cell={cell}
+                solve={solve}
+                answer={cells.result[i]}
+                id={i}
+                handleOnChange={handleOnChange}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
