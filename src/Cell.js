@@ -22,6 +22,7 @@ const Cell = ({ cell, handleOnChange, id, solve, answer }) => {
       <span
         style={{ paddingTop: "4px", marginLeft: "5px", alignSelf: "start" }}
       >
+        {/* {value != 0 ? value : null} */}
         {value}
       </span>
       <TextField
