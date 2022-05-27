@@ -98,7 +98,7 @@ export default function BasicModal({ hanldeGenerate, modalOpen }) {
               component="div"
               style={{ marginTop: "30px" }}
             >
-              Choose borard size:
+              Choose board size:
             </Typography>
             <TextField
               id="standard-basic"
