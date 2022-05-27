@@ -1,7 +1,7 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 
-const Cell = ({ cell, handleOnChange, id }) => {
+const Cell = ({ cell, handleOnChange, id, solve, answer }) => {
   const { bottom, left, right, top, value } = cell;
 
   return (
@@ -29,8 +29,8 @@ const Cell = ({ cell, handleOnChange, id }) => {
         id="outlined-basic"
         variant="outlined"
         type="number"
-        // value={5}
-        // disabled
+        value={solve ? answer : null}
+        disabled={solve}
         onChange={(e) => handleOnChange(e.target.value, id)}
       />
     </div>

@@ -82,6 +82,7 @@ const request = {
 const App = () => {
   const [cells, setCells] = useState(request);
   const [result, setResult] = useState({});
+  const [solve, setSolve] = useState(false);
 
   const handleOnChange = (value, index) => {
     // console.log("hi", value, index);
@@ -159,6 +160,13 @@ const App = () => {
         <Button variant="contained" color="success" onClick={handleSubmit}>
           Submit
         </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => setSolve(true)}
+        >
+          Solve
+        </Button>
       </Stack>
       <div
         style={{
@@ -178,7 +186,14 @@ const App = () => {
         }}
       >
         {cells?.values.map((cell, i) => (
-          <Cell key={i} cell={cell} id={i} handleOnChange={handleOnChange} />
+          <Cell
+            key={i}
+            cell={cell}
+            solve={solve}
+            answer={cells.result[i]}
+            id={i}
+            handleOnChange={handleOnChange}
+          />
         ))}
       </div>
     </div>
